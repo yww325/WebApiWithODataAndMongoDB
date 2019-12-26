@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson.Serialization;
+using WebApiWithOData.Models;
 
 namespace WebApiWithOData
 {
@@ -55,6 +57,14 @@ namespace WebApiWithOData
             {
                 builder.Select().Expand().Filter().OrderBy().Count().MaxTop(100);
                 builder.MapVersionedODataRoutes("odata", "odata", modelBuilder.GetEdmModels());
+            });
+
+            BsonClassMap.RegisterClassMap<Book>(cm => {
+                cm.AutoMap();
+                cm.GetMemberMap(c => c.Title).SetElementName("title");
+                cm.GetMemberMap(c => c.Year).SetElementName("year");
+                cm.GetMemberMap(c => c.Author).SetElementName("author");
+                cm.SetIgnoreExtraElements(true);
             });
         }
     }

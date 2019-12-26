@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.OData;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,11 @@ namespace WebApiWithOData.Controllers
         [EnableQuery]
         public IQueryable<Book> Get()
         {
-            return new string[]
-                { "Alice", "Bob", "Chloe", "Dorothy", "Emma", "Fabian", "Garry", "Hannah", "Julian" }
-                .Select(v => new Book { Title = v, Author ="yww", Year = new Random().Next(2000,2020) })
-                .AsQueryable();
+            var connectionString = "mongodb://localhost:27017";
+            var client = new MongoClient(connectionString);
+            IMongoDatabase db = client.GetDatabase("testdb");
+            IMongoCollection<Book> collection = db.GetCollection<Book>("books"); 
+            return collection.AsQueryable();
         }
     }
 }

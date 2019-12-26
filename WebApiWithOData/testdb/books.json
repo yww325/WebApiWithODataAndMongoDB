@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5e042befd4330f0d14aa7418"},"title":"hello world","year":{"$numberInt":"2010"},"author":"yww"}
+{"_id":{"$oid":"5e042c3ca2ff680d14ebe014"},"title":"merry christmas","year":{"$numberInt":"2019"},"author":"Jason"}
