@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebApiWithOData.Models;
 
 namespace WebApiWithOData.Controllers
-{ 
+{
+    [ApiVersion("1.0")] // can be removed
     public class BooksController : ODataController
     {
         [EnableQuery]

@@ -34,7 +34,11 @@ namespace WebApiWithOData
                 options.EnableEndpointRouting = false;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddApiVersioning();
+            services.AddApiVersioning(o =>
+            {
+            o.AssumeDefaultVersionWhenUnspecified = true;
+            o.DefaultApiVersion = new ApiVersion(1,0);
+        } );
             services.AddOData().EnableApiVersioning();
         }
 
